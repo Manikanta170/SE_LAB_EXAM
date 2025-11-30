@@ -1,0 +1,78 @@
+JENKINS AUTOMATION — MAVEN JAVA & WEB PROJECTS
+Steps for MavenJava Automation
+Step 1: Open Jenkins → New Item
+Step 2: Create Freestyle Project (MavenJava_Build)
+• Enter name → OK
+• Description → Java Build demo
+• SCM → Git repo URL
+• Branches → /main or /master
+Build Steps:
+• Add: Invoke top-level Maven targets → Goals: clean
+• Add: Invoke top-level Maven targets → Goals: install
+Post-build Actions:
+• Archive the artifacts → Files to archive: //
+• Build other projects → Projects to build: MavenJava_Test (Trigger: Only if build is stable)
+Step 3: Create MavenJava_Test
+• Enter name → OK
+• Description → Test demo
+• Build Environment → Check: Delete the workspace before build starts
+• Copy artifacts from another project → Project: MavenJava_Build (Build: Stable build only)
+• Artifacts to copy → //
+• Add: Invoke top-level Maven targets → Goals: test
+• Post-build: Archive the artifacts → Files to archive: //*
+Step 4: Create Pipeline View
+• Click “+” beside All on dashboard → Enter name: MavenJava_Pipeline → Select Build pipeline view → Create
+• Pipeline Initial job: MavenJava_Build
+Step 5: Run the Pipeline
+• Click the pipeline trigger / run
+• Open the small black box → check console output
+• Success = pipeline turns green and MavenJava_Test should be triggered and pass
+
+Maven Web Automation Steps
+Step 1: Click New Item → Create Freestyle Project (MavenWeb_Build)
+• Enter name → OK
+• Description → Web Build demo
+• SCM → Git repo URL
+• Branches → /main or /master
+Build Steps:
+• Add: Invoke top-level Maven targets → Goals: clean
+• Add: Invoke top-level Maven targets → Goals: install
+Post-build Actions:
+• Archive the artifacts → Files to archive: //
+• Build other projects → Projects to build: MavenWeb_Test (Trigger: Only if build is stable)
+Step 3: Create MavenWeb_Test
+• Enter name → OK
+• Description → Test demo
+• Build Environment → Check: Delete the workspace before build starts
+• Copy artifacts from another project → Project: MavenWeb_Build (Build: Stable only)
+• Artifacts to copy → //
+• Add: Invoke top-level Maven targets → Goals: test
+• Post-build: Archive artifacts → Files to archive: //*
+• Post-build: Build other projects → Projects to build: MavenWeb_Deploy
+Step 4: Create MavenWeb_Deploy
+• Enter name → OK
+• Description → Web Code Deployment
+• Build Environment → Check: Delete the workspace before build starts
+• Copy artifacts from another project → Project: MavenWeb_Test (Build: Stable only)
+• Artifacts to copy → //*
+Post-build Actions:
+• Deploy WAR/EAR to a container
+
+WAR/EAR File: //.war*
+
+Context path: Webpath
+
+Add container → Tomcat 9.x remote
+
+Credentials → Username: admin, Password: 1234
+
+Tomcat URL → https://localhost:8085/
+
+Step 5: Create MavenWeb Pipeline View
+• Click “+” beside All → Enter name: MavenWeb_Pipeline → Select Build pipeline view
+• Initial job: MavenWeb_Build
+Step 6: Run Pipeline & Check Output
+• Click RUN on the pipeline view
+• Click the small black box → open console to verify build logs
+• If green → builds succeeded
+• Open Tomcat manager → click /webpath → provide Tomcat credentials (admin/1234) → view deployed app output
