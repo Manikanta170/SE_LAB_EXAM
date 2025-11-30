@@ -1,4 +1,6 @@
 JENKINS AUTOMATION — MAVEN JAVA & WEB PROJECTS
+
+https://github.com/HARIVIGNESHRAO/SELAB.git (maven java and web week8)
 Steps for MavenJava Automation
 Step 1: Open Jenkins → New Item
 Step 2: Create Freestyle Project (MavenJava_Build)
