@@ -1,0 +1,32 @@
+WEEK 2 GIT LAB – COMPLETE WORKFLOW GUIDE
+ Step 1: Create Project Folder
+ Create a new folder on your Desktop named week2-lab-project.
+ Step 2: Create Project Structure
+ Inside the folder, create the following directories:- src- docs- data
+ Step 3: Add Files
+ Inside src, create main.py and utils.py.
+ Inside docs, create readme.txt.
+ Inside data, create sample.txt.
+ Step 4: Open Terminal in Project Folder
+ Right click inside the folder and select Open in Terminal.
+ Step 5: Initialize Git Repository
+ Run the following command:
+ git init
+ Step 6: Add All Files
+ Run:
+ git add .
+ Step 7: Commit Files
+ Run:
+ git commit -m "Initial commit for Week 2 Git Lab project"
+ Step 8: Connect to GitHub Remote Repository
+ Run:
+ git remote add origin https://github.com/kaspavishal/week2-git-lab.git
+ Step 9: Set Main Branch
+ Run:
+ git branch -M main
+ Step 10: Push to GitHub
+ Run:
+ git push -u origin main
+ Enter your GitHub username and personal access token when asked.
+ Completion
+ Your project is now uploaded successfully to your private GitHub repository
