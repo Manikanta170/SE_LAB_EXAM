@@ -1,0 +1,29 @@
+WEEK–3 GIT COLLABORATION WORKFLOW
+ (PERSON 1 & PERSON 2)
+ This PDF explains the complete workflow of Week 3 including repository creation, forking,
+ contribution, pull requests, merging, and review workflow.
+ STEP 1 — Person 1 Creates Main Repository
+ Repository Name: week3-person1-project
+ [Insert Screenshot: Person 1 creating repository]
+ STEP 2 — Person 1 Adds the First File
+ Person 1 creates hello.txt inside GitHub.
+ [Insert Screenshot: hello.txt added]
+ STEP 3 — Person 2 Forks the Repository
+ Person 2 GitHub Username: dynamicduo69
+ Person 2 opens the main repository → clicks Fork.
+ [Insert Screenshot: Forking process]
+ STEP 4 — Person 2 Adds Their Contribution
+ Inside the forked repo, Person 2 adds:
+ feature-person2.txt
+ [Insert Screenshot: feature-person2.txt added]
+ STEP 5 — Person 2 Creates a Pull Request
+ Person 2 opens Contribute → Open Pull Request.
+ [Insert Screenshot: Pull request creation window]
+ STEP 6 — Person 1 Reviews and Merges PR
+ Person 1 checks changes, sees No Conflicts, and clicks Merge Pull Request.
+ [Insert Screenshot: PR merged successfully]
+ FINAL RESULT
+ The main repository now contains:
+ hello.txt (Person 1)
+feature-person2.txt (Person 2)
+ [Insert Screenshot: Final repo file list
