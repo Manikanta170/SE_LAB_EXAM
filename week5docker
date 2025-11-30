@@ -1,0 +1,59 @@
+DOCKER CLI COMMANDS WITH REDIS — SHORT & CLEAN STEPS
+ Step 1: Pull Redis Image
+ Command: docker pull redis
+ Step 2: Run Redis Container
+ Command: docker run --name my-redis -d redis
+ • Creates & starts container.
+ • -d runs in background.
+ Step 3: Check Running Containers
+ Command: docker ps
+ Step 4: Access Redis
+ Command: docker exec -it my-redis redis-cli
+ Example Redis Commands:
+ SET name "Alice"
+ GET name
+ exit
+ Step 5: Stop Container
+ Command: docker stop my-redis
+ Step 6: Restart Container
+ Command: docker start my-redis
+ Step 7: Remove Redis Container
+ Command: docker rm my-redis
+ Step 8: Remove Redis Image
+ Command: docker rmi redis
+ WORKING WITH DOCKERFILE
+ Step 1: Setup Folder
+ Windows: Create C:\DockerProjects\Redis
+ Mac/Linux: mkdir ~/DockerProjects/Redis
+ Step 2: Create Dockerfile
+ Content:
+ FROM redis:latest
+CMD ["redis-server"]
+ DOCKER COMMANDS
+ 1. docker build -t redisnew .
+ • Builds image.
+ 2. docker run --name myredisnew -d redisnew
+ 3. docker ps
+ 4. docker stop myredisnew
+ 5. docker login
+ 6. docker ps -a
+ 7. docker commit 0e993d2009a1 budarajumadhurika/redis1
+ 8. docker images
+ 9. docker push budarajumadhurika/redis1
+ 10. docker rm 0e993d2009a1
+ 11. docker rmi budarajumadhurika/redis1
+ 12. docker ps -a
+ 13. docker logout
+ 14. docker pull budarajumadhurika/redis1
+ 15. docker run --name myredis -d budarajumadhurika/redis1
+ 16. docker exec -it myredis redis-cli
+ 17. SET name "Abcdef"
+ 18. GET name
+19. exit
+ 20. docker ps -a
+ 21. docker stop myredis
+ 22. docker rm 50a6e4a9c326
+ 23. docker images
+ 24. docker rmi budarajumadhurika/redis1
+ Step 3: Logout
+ Command: docker logout
