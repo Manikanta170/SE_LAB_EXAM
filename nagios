@@ -1,0 +1,60 @@
+NAGIOS – COMPLETE EXAM COMMAND GUIDE
+ 1. Pull the Nagios Docker Image
+ Command:
+ docker pull jasonrivers/nagios
+ Description:
+ Pulls the official Nagios Core image maintained by Jason Rivers.
+ Expected Output:
+ Multiple “Pull complete” messages followed by “Downloaded newer image”.-----------------------------------------------------------
+2. Run the Nagios Container (Recommended Port 30088)
+ Command:
+ docker run --name nagios -d -p 127.0.0.1:30088:80 jasonrivers/nagios
+ Description:
+ Starts Nagios in detached mode (-d) and maps port 80 inside the container to port 30088 on localhost.
+ Expected Output:
+ A container ID will be printed.-----------------------------------------------------------
+3. Verify Container is Running
+ Command:
+ docker ps
+ Description:
+ Shows active containers.
+ Expected Output:
+ IMAGE: jasonrivers/nagios
+ PORTS: 127.0.0.1:30088->80/tcp
+ STATUS: Up XX seconds/minutes
+ NAME: nagios-----------------------------------------------------------
+4. Access Nagios Dashboard in Browser
+ URL:
+ http://localhost:30088/nagios/
+ Login:
+ Username: nagiosadmin
+ Password: nagios
+ Expected Output:
+ Nagios home dashboard appears.-----------------------------------------------------------
+5. View Host Status
+ Nagios Menu:
+ Current Status → Hosts
+ Expected Output:
+ Host “localhost” should show:
+ Status: UP
+ Packet loss: 0%
+ RTA: 0.04 ms (approx)-----------------------------------------------------------
+6. View Service Status
+ Nagios Menu:
+ Current Status → Services
+ Expected Output:
+ Typical Results:
+ Current Load – OK
+ Current Users – OK
+ HTTP – WARNING (401 Unauthorized) → NORMAL
+ PING – OK
+ Other checks – PENDING-----------------------------------------------------------
+7. Stop the Nagios Container (Optional)
+ Command:
+ docker stop nagios-----------------------------------------------------------
+8. Remove the Container (Optional)
+ Command:
+ docker rm nagios-----------------------------------------------------------
+9. Clean All Stopped Containers (Optional)
+ Command:
+ docker container prune -f-----------------------------------------------------------
