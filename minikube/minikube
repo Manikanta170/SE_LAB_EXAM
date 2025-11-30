@@ -1,0 +1,92 @@
+Minikube / Kubernetes — Lab Command Sequence
+ A clear, ordered checklist you can run in the lab. Run commands in the same order. Use an Administrator/Root terminal
+ on Windows (or sudo on Linux).
+ Prerequisites (before starting)
+ Ensure Docker Desktop (or a VM driver) and kubectl are installed. Run Docker Desktop and enable WSL2 if
+ using Windows WSL2.
+ If using Windows and you prefer Docker driver: enable Docker Desktop. If you plan to use Hyper-V, enable Hyper-V and
+ the Hyper-V PowerShell module.
+ 1) Start Minikube
+ Start a local Kubernetes single-node cluster using Docker as driver (recommended on Windows).
+ Command(s):
+ minikube start --driver=docker
+ 2) Check Minikube status
+ Verify minikube and cluster components are running.
+ Command(s):
+ minikube status kubectl get nodes
+ 3) (Optional) Docker login
+ Login to Docker Hub if you will pull private images (web-based login may open a browser).
+ Command(s):
+ docker login
+ 4) Create a Deployment (nginx example)
+ Deploy nginx as an example app into Kubernetes (creates a Deployment and a Pod).
+ Command(s):
+ kubectl create deployment myngnix --image=nginx
+ 5) Check Pods and Deployment
+ Confirm the pod is created and running.
+ Command(s):
+ kubectl get deployments kubectl get pods -o wide
+ 6) Scale the Deployment (add replicas)
+ Increase number of replicas (simulate more instances for load).
+ Command(s):
+ kubectl scale deployment myngnix --replicas=4 kubectl get pods
+ 7) Describe a Pod for details
+ View detailed information about one specific pod (replace POD_NAME with one from kubectl get pods).
+ Command(s):
+ kubectl describe pod
+ 8) View Pod logs
+See container logs inside a pod - useful for debugging.
+ Command(s):
+ kubectl logs # For previous logs after restart: kubectl logs --previous
+ 9) Expose the Deployment as a NodePort service
+ Expose the app to be reachable from host via a NodePort.
+ Command(s):
+ kubectl expose deployment myngnix --type=NodePort --port=80 --target-port=80 --name=myngnix
+ kubectl get svc myngnix -o wide
+ 10) Find the NodePort
+ Identify the port assigned on the node (the external port you can access).
+ Command(s):
+ kubectl get service myngnix # Look at PORT(S) column e.g. 80:31147/TCP
+ 11) Port-forward (recommended on Windows for localhost access)
+ Port-forward service to local machine for stable localhost access.
+ Command(s):
+ kubectl port-forward service/myngnix 30088:80 # Keep this terminal open while testing # Access:
+ http://127.0.0.1:30088
+ 12) Open the app in browser
+ Open the forwarded URL (or NodePort) in your browser to confirm the app is reachable.
+ Command(s):
+ Open http://127.0.0.1:30088 or http://: in your browser
+ 13) Open Minikube Dashboard (visual monitoring)
+ Launch the Kubernetes dashboard to visually inspect deployments, pods, and services.
+ Command(s):
+ minikube dashboard # This opens a browser with the dashboard URL; you can also run minikube
+ dashboard --url to get the URL
+ 14) Enable metrics-server (optional, for resource usage and dashboard features)
+ Install metrics-server addon to view CPU/memory usage and enable more dashboard features.
+ Command(s):
+ minikube addons enable metrics-server
+ 15) Simulate failure & observe self-healing
+ Delete a pod manually to see Deployment recreate it (self-healing).
+ Command(s):
+ kubectl delete pod kubectl get pods
+ 16) Scale down or update image (rolling update)
+ Update the deployment image (rolling update) or reduce replicas.
+ Command(s):
+kubectl set image deployment/myngnix myngnix=nginx:1.23.1 kubectl rollout status
+ deployment/myngnix # OR kubectl scale deployment myngnix --replicas=2
+ 17) Rollout history and rollback (if needed)
+ Check rollout history and rollback to previous revision if update caused issues.
+ Command(s):
+ kubectl rollout history deployment/myngnix kubectl rollout undo deployment/myngnix
+ 18) Clean up: delete service and deployment when done
+ Remove the service and deployment to avoid leftover resources in the cluster.
+ Command(s):
+ kubectl delete service myngnix kubectl delete deployment myngnix kubectl get pods --all-namespaces
+ 19) Stop Minikube
+ Halt the Minikube cluster; this powers off the node and frees local resources.
+ Command(s):
+ minikube stop
+ 20) Delete Minikube cluster (if you want to remove it completely)
+ Remove all minikube VM/container artifacts — use when you no longer need the cluster.
+ Command(s):
+ minikube delete
